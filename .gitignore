@@ -1,0 +1,53 @@
+# Ignore operating system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE files
+.idea/
+.vscode/
+
+# Ignore build and compiled files
+build/
+dist/
+*.exe
+*.dll
+
+# Ignore dependencies
+node_modules/
+vendor/
+.next/
+
+# Ignore log files
+*.log
+
+# Ignore configuration files with sensitive information
+config.ini
+secrets.yaml
+
+# Ignore temporary files
+*.tmp
+
+# Ignore backup files
+*.bak
+*.backup
+
+# Ignore cache directories
+.cache/
+.cached/
+
+# Ignore specific files
+example.txt
+.env
+serviceAccount.json
+abi.json
+
+# Ignore package manager lock files
+package-lock.json
+yarn.lock
+
+# Ignore files in a specific directory
+path/to/directory/
+
+# Ignore all files in a specific directory except for a specific file
+path/to/directory/*
+!path/to/directory/specific-file.txt
