@@ -6,45 +6,60 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 function App() {
+  // Get the message API and context holder from antd
   const [messageApi, contextHolder] = message.useMessage();
+  // Get the router object from Next.js
   const { push } = useRouter();
+  // Get the session status using the useSession hook from next-auth/react
   const { status } = useSession();
 
+  // Function to handle NFT purchase
   async function purchaseNFT() {
-
-    if(status === "authenticated"){
-
+    // Check if the user is authenticated
+    if (status === "authenticated") {
+      // Create an ethers BrowserProvider instance
       const provider = new ethers.BrowserProvider(window.ethereum);
+      // Request access to the user's Ethereum accounts
       await provider.send("eth_requestAccounts", []);
+      // Get the connected wallet signer
       const connectedWallet = await provider.getSigner();
 
+      // Create a contract instance of PatronContract
       const PatronContract = new ethers.Contract(
         "0xbddbF0Fc68982C307030A0D0053CF398D51d4184",
         ["function safeMint(address to, string memory uri) public payable"],
         connectedWallet
-      ); 
+      );
 
+      // Call the safeMint function to purchase the NFT
       const purchase = await PatronContract.safeMint(
-        connectedWallet.address, "", {value: parseEther("0.1")}
-      )
+        connectedWallet.address,
+        "",
+        { value: parseEther("0.1") }
+      );
 
+      // Wait for the purchase transaction to be confirmed and obtain the receipt
       purchase.wait().then(async (receipt) => {
         console.log(receipt);
         console.log(receipt.logs[2].topics[3]);
 
+        // Extract the ID of the NFT from the receipt
         const id = parseInt(receipt.logs[2].topics[3]);
 
+        // Send a GET request to extend the membership for an extra month
         const res = await axios.get(`http://localhost:3001/extraMonth`, {
           params: { id: id },
         });
 
-        messageApi.success("NFT Purchased")
-      })
-
+        // Display success message using the message API
+        messageApi.success("NFT Purchased");
+      });
     } else {
-      messageApi.warning("please connect wallet first");
+      // Display warning message if the user is not authenticated
+      messageApi.warning("Please connect wallet first");
     }
   }
+
   return (
     <>
       {contextHolder}
