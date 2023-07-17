@@ -15,7 +15,6 @@ dist/
 # Ignore dependencies
 node_modules/
 vendor/
-.next/
 
 # Ignore log files
 *.log

@@ -17,3 +17,7 @@ DeBlog is a membership-based website that offers exclusive content accessible th
 - Moralis: Integration for interacting with blockchain data and managing user subscriptions.
 - Firebase: Used for storing NFT metadata and images.
 - HTML, CSS, and JavaScript: Standard web technologies for designing and enhancing the user interface.
+
+------------------------------------------------------------------------------------------------------------------------
+![Screenshot 1](./screen1.png)
+![Screenshot 2](./screen2.png)
