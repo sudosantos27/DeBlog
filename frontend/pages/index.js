@@ -24,15 +24,15 @@ function App() {
       // Get the connected wallet signer
       const connectedWallet = await provider.getSigner();
 
-      // Create a contract instance of PatronContract
-      const PatronContract = new ethers.Contract(
+      // Create a contract instance of DeBlogContract
+      const DeBlogContract = new ethers.Contract(
         "0xbddbF0Fc68982C307030A0D0053CF398D51d4184",
         ["function safeMint(address to, string memory uri) public payable"],
         connectedWallet
       );
 
       // Call the safeMint function to purchase the NFT
-      const purchase = await PatronContract.safeMint(
+      const purchase = await DeBlogContract.safeMint(
         connectedWallet.address,
         "",
         { value: parseEther("0.1") }
